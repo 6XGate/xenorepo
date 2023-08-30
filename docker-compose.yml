@@ -1,0 +1,30 @@
+volumes:
+  xenorepo:
+
+services:
+  xenorepo:
+    privileged: true
+    image: xenorepo
+    build: .
+    ulimits:
+      nofile:
+        soft: 1024
+        hard: 10240
+    volumes:
+      - "xenorepo:/var/cache/pacman/xeno:z"
+    tmpfs:
+      - /tmp:mode=777,exec
+      - /run
+      - /run/lock
+  nginx:
+    privileged: true
+    image: docker.io/nginx
+    depends_on: ["xenorepo"]
+    volumes:
+      - xenorepo:/usr/share/nginx/html/xeno:z
+    tmpfs:
+      - /tmp
+      - /run
+      - /run/lock
+    ports:
+      - "127.0.0.1:8080:80"

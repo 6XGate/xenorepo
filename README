@@ -1,0 +1,30 @@
+# EZRepo
+
+## Introduction
+
+This is currently a quick-and-dirty Arch repository setup to host built AUR packages. It is
+designed for use with Docker.
+
+## Hosting
+
+To host a repository for other machines to access you will need to host the xeno cache folder with
+a web server. A docker-compose setup is provided as an example, but it should be as easy as
+adding the volume for the xeno repo to the web server container.
+
+## Repository management
+
+To manage the respository, you will need to execute bash in the container.
+
+### Adding an AUR package
+
+`xeno add [aur sync options] <package name>...`
+
+### Removing an AUR package
+
+`xeno remove [repoctl remove options] <package name>`
+
+### Updating packages
+
+Packages will be updated via cronie, but can be done manually with the following commands:
+
+`xeno update`

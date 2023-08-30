@@ -1,0 +1,15 @@
+# Repository management
+
+## Adding an AUR package
+
+`xeno add [aur sync options] <package name>...`
+
+## Removing an AUR package
+
+`xeno remove [repoctl remove options] <package name>`
+
+## Updating packages
+
+Packages will be updated via cronie, but can be done manually with the following commands:
+
+`xeno update`
