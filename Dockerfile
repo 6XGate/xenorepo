@@ -5,7 +5,7 @@ LABEL org.opencontainers.image.description="Custom arch repository"
 LABEL org.opencontainers.image.authors="Matthew Holder"
 LABEL org.opencontainers.image.documentation="https://github.com/6XGate/xenorepo"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.version="1.0.0"
+LABEL org.opencontainers.image.version="1.0.1"
 
 COPY ./files/etc/pacman.xeno.conf /etc/pacman.d/xeno
 COPY ./files/etc/aursync.crontab /etc/cron.d/aursync
