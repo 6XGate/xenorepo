@@ -11,7 +11,7 @@ LABEL org.opencontainers.image.description="Custom ${DISTRONAME} repository"
 LABEL org.opencontainers.image.authors="Matthew Holder"
 LABEL org.opencontainers.image.documentation="https://github.com/6XGate/xenorepo"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.version="2.0.1"
+LABEL org.opencontainers.image.version="2.0.2"
 
 # Define the volumes.
 VOLUME ["/tmp", "/run", "/run/lock", "/var/cache/pacman/xeno"]
