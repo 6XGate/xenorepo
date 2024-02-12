@@ -3,5 +3,4 @@ set -Eeuo pipefail
 
 # Update the system.
 echo ": Updating system and AUR packages..."
-sudo pacman -Syu --noconfirm
-aur sync --no-view --noconfirm -u
+xeno update

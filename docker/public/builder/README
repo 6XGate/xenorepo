@@ -6,7 +6,7 @@
 
 ## Removing an AUR package
 
-`xeno remove [repoctl remove options] <package name>`
+`xeno remove [aur remove options] <package name>`
 
 ## Updating packages
 

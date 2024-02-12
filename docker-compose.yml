@@ -3,8 +3,8 @@ volumes:
 
 services:
   xenorepo:
-    privileged: true
     image: xenorepo
+    container_name: xenorepo
     build: .
     ulimits:
       nofile:
@@ -17,7 +17,6 @@ services:
       - /run
       - /run/lock
   nginx:
-    privileged: true
     image: docker.io/nginx
     depends_on: ["xenorepo"]
     volumes:

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+command=${1:-}
+shift
+
+if [[ "$command" == "sudo" ]]; then
+	. xeno-sudo "$@"
+elif [[ "$command" == "exec" ]]; then
+	. xeno-exec "$@"
+elif [[ "$command" == "bash" ]]; then
+	. xeno-exec bash "$@"
+else
+	. xeno-exec xeno "$command" "$@"
+fi

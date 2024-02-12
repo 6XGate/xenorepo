@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+# Container system: docker or podman.
+CONTAINERSYSTEM="${CONTAINERSYSTEM:=docker}"
+
+# Container name or hash.
+CONTAINER="${CONTAINER:=xenorepo}"
+
+CONTAINERCMD=$(which $CONTAINERSYSTEM)
+$CONTAINERCMD exec -it $CONTAINER "$@"
