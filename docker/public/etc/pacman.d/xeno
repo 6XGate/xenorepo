@@ -2,7 +2,3 @@
 CacheDir = /var/cache/pacman/pkg
 CacheDir = /var/cache/pacman/xeno
 CleanMethod = KeepCurrent
-
-[xeno]
-SigLevel = Optional TrustAll
-Server = file:///var/cache/pacman/xeno

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+echoerr() { echo "$@" 1>&2; }
+
+if [[ $EUID -eq 0 ]]; then
+    echoerr "ERROR: Do not run xeno as root"
+    exit 1
+fi
+
+PKGDEST="${PKGDEST:=/var/cache/pacman/xeno}"
+REPODB="${REPODB:=$PKGDEST/xeno.db.tar.gz}"
+
+command=${1:-}
+shift
+
+if [ "$command" == "add" ]; then
+	echo ": Adding package to xeno repository"
+	yay -Syuu --noconfirm "$@"
+	repo-add --new --remove --prevent-downgrade "$REPODB" *.pkg.tar* || true
+	exit 0
+elif [ "$command" == "remove" ]; then
+	echo ": Removing package to xeno repository"
+	pacman -R --noconfirm "$@"
+	repo-remove "$REPODB" "$@"
+	paccache -c "${REPODB%/*}" -rvk0 "$@"
+	exit 0
+elif [ "$command" == "update" ]; then
+	echo ": Updating packages in the xeno repository"
+	sudo pacman -Syu --noconfirm
+	yay -Syuu --noconfirm
+	repo-add --new --remove --prevent-downgrade "$REPODB" *.pkg.tar* || true
+	exit 0
+fi
+
+echoerr "ERROR: No command specified, use add, remove, or update."
+glow /builder/README
+exit 1

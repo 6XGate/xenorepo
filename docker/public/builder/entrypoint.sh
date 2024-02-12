@@ -19,6 +19,6 @@ popd
 
 # Update the system.
 echo ": Updating system software..."
-sudo -- pacman -Syu --noconfirm
+sudo -- pacman -Syyu --noconfirm
 
 "$@"
