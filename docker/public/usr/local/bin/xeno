@@ -14,21 +14,27 @@ command=${1:-}
 shift
 
 if [ "$command" == "add" ]; then
-	echo ": Adding package to xeno repository"
-	yay -Syuu --noconfirm "$@"
-	repo-add --new --remove --prevent-downgrade "$REPODB" *.pkg.tar* || true
+	pushd "$REPODB"
+		echo ": Adding package to xeno repository"
+		yay -Syuu --noconfirm "$@"
+		repo-add --new --remove --prevent-downgrade "$REPODB" *.pkg.tar* || true
+	popd
 	exit 0
 elif [ "$command" == "remove" ]; then
-	echo ": Removing package to xeno repository"
-	pacman -R --noconfirm "$@"
-	repo-remove "$REPODB" "$@"
-	paccache -c "${REPODB%/*}" -rvk0 "$@"
+	pushd "$REPODB"
+		echo ": Removing package to xeno repository"
+		pacman -R --noconfirm "$@"
+		repo-remove "$REPODB" "$@"
+		paccache -c "${REPODB%/*}" -rvk0 "$@"
+	popd
 	exit 0
 elif [ "$command" == "update" ]; then
-	echo ": Updating packages in the xeno repository"
-	sudo pacman -Syu --noconfirm
-	yay -Syuu --noconfirm
-	repo-add --new --remove --prevent-downgrade "$REPODB" *.pkg.tar* || true
+	pushd "$REPODB"
+		echo ": Updating packages in the xeno repository"
+		sudo pacman -Syu --noconfirm
+		yay -Syuu --noconfirm
+		repo-add --new --remove --prevent-downgrade "$REPODB" *.pkg.tar* || true
+	popd
 	exit 0
 fi
 
